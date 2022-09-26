@@ -2,7 +2,8 @@
   <div id="app" class="d-flex flex-column" style="height: 100vh;">
     <headerComponent/>
     <loadingComponent v-if="loading"/>
-    <mainComponent v-else :listAlbum="cards"/>
+    <mainComponent v-else-if="cards.length !== 0" :listAlbum="cards"/>
+    <errorComponent :message="errorMessage" v-else/>
   </div>
 </template>
 
@@ -10,13 +11,15 @@
 import headerComponent from './components/headerComponent.vue';
 import mainComponent from './components/mainComponent.vue';
 import loadingComponent from './loadingComponent.vue';
+import errorComponent from './errorComponent.vue';
 import axios from 'axios';
 
 export default {
   name: 'App',
   data(){return{
     cards:[],
-    loading: true
+    loading: true,
+    errorMessage:''
   }},
   created(){
     axios.get('https://flynn.boolean.careers/exercises/api/array/music')
@@ -30,15 +33,19 @@ export default {
       }
       else{
         this.loading = false
-        data.success = false
       }
+    }).catch(error=>{
+      console.log(error)
+      this.loading = false
+      this.errorMessage = 'Errore: ' + error.message;
     })
 
   },
   components: {
     headerComponent,
     mainComponent,
-    loadingComponent
+    loadingComponent,
+    errorComponent
   },
 }
 </script>
