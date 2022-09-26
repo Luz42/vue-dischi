@@ -1,6 +1,5 @@
 <template>
-  <main class="flex-grow-1">
-    MAIN
+  <main class="p-5 flex-grow-1">
     <cardComponent/>
   </main>
 </template>
