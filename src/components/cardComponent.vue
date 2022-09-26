@@ -10,6 +10,11 @@ export default {
 }
 </script>
 
-<style>
+<style  scoped lang="scss">
+  @import '@/assets/variables.scss';
+
+  div{
+    background-color: $bg-header-card;
+  }
 
 </style>

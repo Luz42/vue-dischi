@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="flex-grow-1">
     MAIN
     <cardComponent/>
   </main>
@@ -16,6 +16,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
+  @import '@/assets/variables.scss';
 
+
+    main{
+        background-color: $bg-main;
+    }
 </style>
