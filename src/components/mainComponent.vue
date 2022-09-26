@@ -1,6 +1,8 @@
 <template>
-  <main class="p-5 flex-grow-1">
-    <cardComponent/>
+  <main class="container-fluid flex-grow-1">
+    <div class="row p-5 gap-4 d-flex justify-content-center">
+        <cardComponent :card="album" v-for="album in listAlbum" :key="album.title" />
+    </div>
   </main>
 </template>
 
@@ -11,6 +13,9 @@ export default {
     name:'mainComponent',
     components:{
         cardComponent
+    },
+    props:{
+        listAlbum: Array
     }
 }
 </script>

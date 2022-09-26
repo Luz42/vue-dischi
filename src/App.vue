@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="d-flex flex-column" style="height: 100vh;">
     <headerComponent/>
-    <mainComponent/>
+    <mainComponent :listAlbum="cards"/>
   </div>
 </template>
 
