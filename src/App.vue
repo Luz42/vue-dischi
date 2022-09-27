@@ -2,7 +2,7 @@
   <div id="app" class="d-flex flex-column" style="height: 100vh;">
     <headerComponent @filteredAlbums="filterGenre" :genres="listGenre"/>
     <loadingComponent v-if="loading"/>
-    <mainComponent v-else-if="cards.length !== 0" :listAlbum="cards"/>
+    <mainComponent v-else-if="cards.length !== 0" :listAlbum="cardsToDisplay"/>
     <errorComponent :message="errorMessage" v-else/>
   </div>
 </template>
@@ -18,6 +18,7 @@ export default {
   name: 'App',
   data(){return{
     cards:[],
+    cardsToDisplay:[],
     loading: true,
     errorMessage:'',
     listGenre:[]
@@ -30,6 +31,7 @@ export default {
         this.loading = false
         //console.log(data.response)
         this.cards = data.response
+        this.cardsToDisplay = data.response
         console.log(this.cards)
         //creo un array con i generi degli album per andare a creare le opzioni
         //inizializzo l'array
@@ -54,13 +56,11 @@ export default {
   methods:{
     filterGenre(typeGenre){
       console.log(typeGenre)
-      let filteredListAlbum = []
-      this.cards.forEach(album => {
-        if(album.genre == typeGenre){
-          filteredListAlbum.push(album)
-        }        
-      });
-      console.log(filteredListAlbum)
+      this.cardsToDisplay = this.cards          
+
+      if(typeGenre !== 'All'){
+        this.cardsToDisplay = this.cardsToDisplay.filter(album=> album.genre == typeGenre)
+      }
 
     }
   },
