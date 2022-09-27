@@ -6,7 +6,7 @@
       </div>
       <div class="col">
         <div class="form-floating">
-          <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+          <select @click="$emit('filteredAlbums', selected)" v-model="selected" class="form-select" id="floatingSelect" aria-label="Floating label select example">
             <option v-for="genre in genres" :key="genre" :value="genre">{{ genre }}</option>
           </select>
           <label for="floatingSelect">Select gender</label>
@@ -19,6 +19,9 @@
 <script>
 export default {
   name:'headerComponent',
+  data(){return{
+    selected:''
+  }},
   props:{
     genres: Array
   }
