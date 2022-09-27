@@ -54,6 +54,14 @@ export default {
   methods:{
     filterGenre(typeGenre){
       console.log(typeGenre)
+      let filteredListAlbum = []
+      this.cards.forEach(album => {
+        if(album.genre == typeGenre){
+          filteredListAlbum.push(album)
+        }        
+      });
+      console.log(filteredListAlbum)
+
     }
   },
   components: {
