@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="d-flex flex-column" style="height: 100vh;">
-    <headerComponent/>
+    <headerComponent :genres="listGenre"/>
     <loadingComponent v-if="loading"/>
     <mainComponent v-else-if="cards.length !== 0" :listAlbum="cards"/>
     <errorComponent :message="errorMessage" v-else/>
@@ -19,7 +19,8 @@ export default {
   data(){return{
     cards:[],
     loading: true,
-    errorMessage:''
+    errorMessage:'',
+    listGenre:[]
   }},
   created(){
     axios.get('https://flynn.boolean.careers/exercises/api/array/music')
@@ -27,13 +28,23 @@ export default {
 
       if(status === 200){
         this.loading = false
-        console.log(data.response)
+        //console.log(data.response)
         this.cards = data.response
         console.log(this.cards)
+        //creo un array con i generi degli album per andare a creare le opzioni
+        //inizializzo l'array
+          data.response.forEach(album => {
+          //se l'elemento non è già all'interno dell'array lo pusho
+          if(!this.listGenre.includes(album.genre)){
+            this.listGenre.push(album.genre)
+          }
+        });
       }
       else{
         this.loading = false
       }
+      console.log(this.listGenre)         
+
     }).catch(error=>{
       console.log(error)
       this.loading = false

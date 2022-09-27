@@ -1,12 +1,27 @@
 <template>
   <header class="container-fluid p-2">
-    <img class="img-fluid" src="@/assets/spotify-logo.png" alt="spotify-logo">
+    <div class="row">
+      <div class="col">
+        <img class="img-fluid" src="@/assets/spotify-logo.png" alt="spotify-logo">
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+            <option v-for="genre in genres" :key="genre" :value="genre">{{ genre }}</option>
+          </select>
+          <label for="floatingSelect">Select gender</label>
+        </div>
+      </div>
+    </div>
   </header>
 </template>
 
 <script>
 export default {
-  name:'headerComponent'
+  name:'headerComponent',
+  props:{
+    genres: Array
+  }
 }
 </script>
 
